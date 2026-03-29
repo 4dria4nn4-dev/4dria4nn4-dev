@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dr Jan Kowalski – Strona Akademicka</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f2ed;
+      --text: #1a1814;
+      --accent: #8b3a2a;
+      --muted: #7a7570;
+      --border: #d8d2c8;
+      --card: #efece7;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3rem;
+      background: rgba(245,242,237,0.88);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 1rem;
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 7rem 3rem 4rem;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-text h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 1.4rem 0 2rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--muted);
+      font-style: italic;
+      max-width: 400px;
+    }
+
+    .hero-image-box {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .avatar-placeholder {
+      width: 340px;
+      height: 420px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      gap: 0.6rem;
+      position: relative;
+    }
+
+    .avatar-placeholder svg {
+      width: 64px;
+      height: 64px;
+      opacity: 0.3;
+    }
+
+    .avatar-placeholder span {
+      opacity: 0.5;
+    }
+
+    .badge {
+      position: absolute;
+      bottom: -1px; right: -1px;
+      background: var(--accent);
+      color: #f5f2ed;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      padding: 0.45rem 0.9rem;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── BIO ── */
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .bio-text p {
+      font-size: 1.18rem;
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+      color: #2e2b27;
+    }
+
+    .bio-facts {
+      border-left: 2px solid var(--border);
+      padding-left: 2rem;
+    }
+
+    .bio-fact {
+      margin-bottom: 1.8rem;
+    }
+
+    .bio-fact-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .bio-fact-value {
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    /* ── PUBLICATIONS ── */
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .pub-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .pub-item:first-child { border-top: 1px solid var(--border); }
+
+    .pub-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+      padding-top: 0.2rem;
+      letter-spacing: 0.05em;
+    }
+
+    .pub-body {}
+
+    .pub-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      font-style: italic;
+      line-height: 1.4;
+      margin-bottom: 0.35rem;
+    }
+
+    .pub-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .pub-doi {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .pub-doi:hover { border-color: var(--accent); }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-info {}
+
+    .contact-row {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 2rem;
+    }
+
+    .contact-row-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .contact-row-value {
+      font-size: 1.1rem;
+    }
+
+    .contact-row-value a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .contact-row-value a:hover { border-color: var(--accent); }
+
+    .contact-note {
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.7;
+      border-left: 2px solid var(--border);
+      padding-left: 1.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-text, .hero-image-box {
+      animation: fadeUp 0.9s ease both;
+    }
+    .hero-image-box { animation-delay: 0.15s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+
+      #hero {
+        grid-template-columns: 1fr;
+        padding-top: 6rem;
+        gap: 2.5rem;
+      }
+
+      .hero-image-box { justify-content: center; }
+      .avatar-placeholder { width: 100%; max-width: 320px; height: 320px; }
+
+      section { padding: 3.5rem 1.5rem; }
+      .bio-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .bio-facts { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 2rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .pub-item { grid-template-columns: 60px 1fr; gap: 1rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAWIGACJA -->
+<nav>
+  <a class="nav-logo" href="#hero">jan.kowalski</a>
+  <ul class="nav-links">
+    <li><a href="#bio">O mnie</a></li>
+    <li><a href="#publications">Publikacje</a></li>
+    <li><a href="#contact">Kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-text">
+    <h1>Dr<br><em>Jan</em><br>Kowalski</h1>
+    <p class="hero-title">Adiunkt · Wydział Nauk Społecznych · Uniwersytet Warszawski</p>
+    <p class="hero-subtitle">Socjologia cyfrowa, metodologia badań jakościowych, transformacje miejskie.</p>
+  </div>
+  <div class="hero-image-box">
+    <div class="avatar-placeholder">
+      <!-- Zastąp poniższy blok tagiem <img src="zdjecie.jpg" alt="Jan Kowalski"> -->
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="22" r="13" stroke="#7a7570" stroke-width="2"/>
+        <path d="M8 56c0-13.255 10.745-24 24-24s24 10.745 24 24" stroke="#7a7570" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span>[ wstaw zdjęcie ]</span>
+      <div class="badge">UW · 2018–</div>
+    </div>
+  </div>
+</div>
+
+<!-- BIO -->
+<section id="bio">
+  <p class="section-label">// 01 — o mnie</p>
+  <div class="bio-grid">
+    <div class="bio-text">
+      <p>
+        Jestem socjologiem specjalizującym się w badaniach nad cyfrową sferą publiczną oraz
+        przemianami tożsamości w środowiskach miejskich. Moje zainteresowania łączą teorię
+        krytyczną z metodami etnografii cyfrowej i analizy sieci społecznych.
+      </p>
+      <p>
+        Stopień doktora nauk społecznych uzyskałem w 2018 roku na Wydziale Nauk Społecznych
+        Uniwersytetu Warszawskiego. Odbyłem staże badawcze na Humboldt-Universität zu Berlin
+        oraz University of Amsterdam. Prowadzę zajęcia z metodologii badań społecznych,
+        socjologii miasta i teorii mediów.
+      </p>
+      <p>
+        Aktualnie kieruję grantem NCN OPUS poświęconym praktykom obywatelskim w przestrzeni
+        cyfrowej polskich metropolii.
+      </p>
+    </div>
+    <div class="bio-facts">
+      <div class="bio-fact">
+        <div class="bio-fact-label">Stanowisko</div>
+        <div class="bio-fact-value">Adiunkt</div>
+      </div>
+      <div class="bio-fact">
+        <div class="bio-fact-label">Jednostka</div>
+        <div class="bio-fact-value">Instytut Socjologii, UW</div>
+      </div>
+      <div class="bio-fact">
+        <div class="bio-fact-label">Zainteresowania</div>
+        <div class="bio-fact-value">Socjologia cyfrowa, metody jakościowe, miasto</div>
+      </div>
+      <div class="bio-fact">
+        <div class="bio-fact-label">Języki</div>
+        <div class="bio-fact-value">Polski, angielski, niemiecki</div>
+      </div>
+      <div class="bio-fact">
+        <div class="bio-fact-label">ORCID</div>
+        <div class="bio-fact-value">
+          <a href="https://orcid.org/0000-0000-0000-0000" style="color:var(--accent)">0000-0000-0000-0000</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLIKACJE -->
+<section id="publications">
+  <p class="section-label">// 02 — wybrane publikacje</p>
+  <div class="pub-list">
+
+    <div class="pub-item">
+      <div class="pub-year">2024</div>
+      <div class="pub-body">
+        <div class="pub-title">Między uczestnictwem a obserwacją. Etnografia cyfrowa wspólnot miejskich</div>
+        <div class="pub-meta">Przegląd Socjologiczny, 73(2), 45–78</div>
+        <a class="pub-doi" href="#">doi:10.18778/0033-2356.73.02</a>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2023</div>
+      <div class="pub-body">
+        <div class="pub-title">Digital Publics and Urban Citizenship in Post-Transition Poland</div>
+        <div class="pub-meta">East European Politics and Societies, 37(4), 1102–1129</div>
+        <a class="pub-doi" href="#">doi:10.1177/08883254231185</a>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2022</div>
+      <div class="pub-body">
+        <div class="pub-title">Przestrzeń, sieć, wspólnota. Socjologia miasta w erze platform cyfrowych</div>
+        <div class="pub-meta">Warszawa: Wydawnictwo Naukowe Scholar, ss. 312</div>
+        <a class="pub-doi" href="#">ISBN 978-83-7383-000-0</a>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2021</div>
+      <div class="pub-body">
+        <div class="pub-title">Algorytmiczne zarządzanie uwagą a kryzys sfery publicznej</div>
+        <div class="pub-meta">Kultura i Społeczeństwo, 65(1), 23–51</div>
+        <a class="pub-doi" href="#">doi:10.35757/KiS.2021.65.1.2</a>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2019</div>
+      <div class="pub-body">
+        <div class="pub-title">Mobilne miasto. Praktyki nawigacji i tożsamość miejska</div>
+        <div class="pub-meta">Societas/Communitas, 27(1), 89–114</div>
+        <a class="pub-doi" href="#">doi:10.21697/sc.2019.27.1.05</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="contact">
+  <p class="section-label">// 03 — kontakt</p>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="contact-row">
+        <span class="contact-row-label">E-mail</span>
+        <span class="contact-row-value">
+          <a href="mailto:j.kowalski@uw.edu.pl">j.kowalski@uw.edu.pl</a>
+        </span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-row-label">Adres</span>
+        <span class="contact-row-value">
+          Instytut Socjologii UW<br>
+          ul. Karowa 18, pok. 214<br>
+          00-927 Warszawa
+        </span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-row-label">Dyżur</span>
+        <span class="contact-row-value">Czwartki, 13:00–14:30<br><small style="font-size:0.85rem;color:var(--muted)">(w semestrze; proszę o wcześniejszy kontakt e-mailem)</small></span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-row-label">Profile naukowe</span>
+        <span class="contact-row-value" style="display:flex;gap:1.2rem;flex-wrap:wrap;">
+          <a href="#">Google Scholar</a>
+          <a href="#">ResearchGate</a>
+          <a href="#">Academia.edu</a>
+        </span>
+      </div>
+    </div>
+    <p class="contact-note">
+      Chętnie odpowiadam na zapytania dotyczące współpracy badawczej, recenzji oraz
+      współprowadzenia zajęć. W sprawach studenckich proszę korzystać z systemu
+      USOS lub kontaktować się przez e-mail uczelniany.
+    </p>
+  </div>
+</section>
+
+<!-- STOPKA -->
+<footer>
+  <span>© 2025 Jan Kowalski · Uniwersytet Warszawski</span>
+  <span>Ostatnia aktualizacja: styczeń 2025</span>
+</footer>
+
+</body>
+</html>
